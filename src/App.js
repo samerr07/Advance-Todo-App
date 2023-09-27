@@ -65,6 +65,8 @@ function App() {
     
   };
 
+  //Move the item up
+
   const moveItemUp = (id) => {
     const index = todos.findIndex((todo) => todo.id === id);
     if (index > 0) {
@@ -75,6 +77,8 @@ function App() {
       setTodos(updatedTodos);
     }
   };
+
+  //Move the item up down
 
   const moveItemDown = (id) => {
     const index = todos.findIndex((todo) => todo.id === id);
@@ -113,7 +117,7 @@ function App() {
     
   };
 
-
+  // Filtering the items
 
   const filteredTodos = todos.filter((todo) => {
     if (filter === "all") {
@@ -127,6 +131,8 @@ function App() {
     return true;
     // console.log(todo.completed);
   });
+
+  // Edit and Update the Items
 
   const handleEditTodo = (id, text) => {
     setEditIndex(id);
@@ -155,6 +161,8 @@ function App() {
       });
   };
 
+  //Clear all the items
+  
   const handleClearAll = ()=>{
     setTodos([])
     toast.success('All the items deleted from the list !!!', {
@@ -169,11 +177,14 @@ function App() {
       });
   }
 
+  //Total count of Items
+
   const completedCount = todos.filter((todo) => todo.completed).length;
 
 
 
   // Save todos to localStorage whenever they change
+
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
@@ -185,6 +196,7 @@ function App() {
       <div className="todo-app">
         <h1>Todo App</h1>
 
+        {/* Input Section for add items  */}
         <div className="add-todo">
           <input
             className="add"
@@ -198,6 +210,8 @@ function App() {
             Add
           </button>
         </div>
+        
+        {/* Filtering the items  */}
 
         <div className="filter-container">
           <button
@@ -222,6 +236,8 @@ function App() {
           <button onClick={handleClearAll} style={{"color":"white"}} className="clearBtn">Clear All</button>
         </div>
 
+        {/* Display the list of items  */}
+
         <div className="todo-list">
           {filteredTodos.map((todo) => (
             <div
@@ -240,6 +256,8 @@ function App() {
               ) : (
                 <span className="todo-text">{todo.text}</span>
               )}
+
+              {/* Todos actions like delete,completed, edit etc.  */}
 
               <div className="todo-actions">
                 <button
@@ -287,6 +305,8 @@ function App() {
             </div>
           ))}
         </div>
+
+        {/* Total counts of Todos items  */}
 
         <div className="todo-stats">
           <p>
